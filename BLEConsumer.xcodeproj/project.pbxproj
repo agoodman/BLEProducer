@@ -1,0 +1,331 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7EF597411E5FE74F0039821A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF597401E5FE74F0039821A /* AppDelegate.swift */; };
+		7EF597431E5FE74F0039821A /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF597421E5FE74F0039821A /* MasterViewController.swift */; };
+		7EF597451E5FE74F0039821A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF597441E5FE74F0039821A /* DetailViewController.swift */; };
+		7EF597481E5FE74F0039821A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EF597461E5FE74F0039821A /* Main.storyboard */; };
+		7EF5974A1E5FE74F0039821A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EF597491E5FE74F0039821A /* Assets.xcassets */; };
+		7EF5974D1E5FE74F0039821A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EF5974B1E5FE74F0039821A /* LaunchScreen.storyboard */; };
+		7EF597561E5FE75E0039821A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF597551E5FE75E0039821A /* CoreBluetooth.framework */; };
+		7EF5977C1E5FF7560039821A /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5977B1E5FF7560039821A /* DeviceManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7EF5973D1E5FE74F0039821A /* BLEConsumer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLEConsumer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EF597401E5FE74F0039821A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7EF597421E5FE74F0039821A /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		7EF597441E5FE74F0039821A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		7EF597471E5FE74F0039821A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7EF597491E5FE74F0039821A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7EF5974C1E5FE74F0039821A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7EF5974E1E5FE74F0039821A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EF597551E5FE75E0039821A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		7EF5977B1E5FF7560039821A /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7EF5973A1E5FE74F0039821A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EF597561E5FE75E0039821A /* CoreBluetooth.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7EF597341E5FE74F0039821A = {
+			isa = PBXGroup;
+			children = (
+				7EF5973F1E5FE74F0039821A /* BLEConsumer */,
+				7EF5973E1E5FE74F0039821A /* Products */,
+				7EF597541E5FE75E0039821A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		7EF5973E1E5FE74F0039821A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7EF5973D1E5FE74F0039821A /* BLEConsumer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7EF5973F1E5FE74F0039821A /* BLEConsumer */ = {
+			isa = PBXGroup;
+			children = (
+				7EF5977B1E5FF7560039821A /* DeviceManager.swift */,
+				7EF597401E5FE74F0039821A /* AppDelegate.swift */,
+				7EF597421E5FE74F0039821A /* MasterViewController.swift */,
+				7EF597441E5FE74F0039821A /* DetailViewController.swift */,
+				7EF597461E5FE74F0039821A /* Main.storyboard */,
+				7EF597491E5FE74F0039821A /* Assets.xcassets */,
+				7EF5974B1E5FE74F0039821A /* LaunchScreen.storyboard */,
+				7EF5974E1E5FE74F0039821A /* Info.plist */,
+			);
+			path = BLEConsumer;
+			sourceTree = "<group>";
+		};
+		7EF597541E5FE75E0039821A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EF597551E5FE75E0039821A /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7EF5973C1E5FE74F0039821A /* BLEConsumer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EF597511E5FE74F0039821A /* Build configuration list for PBXNativeTarget "BLEConsumer" */;
+			buildPhases = (
+				7EF597391E5FE74F0039821A /* Sources */,
+				7EF5973A1E5FE74F0039821A /* Frameworks */,
+				7EF5973B1E5FE74F0039821A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BLEConsumer;
+			productName = BLEConsumer;
+			productReference = 7EF5973D1E5FE74F0039821A /* BLEConsumer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7EF597351E5FE74F0039821A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Aubrey Goodman";
+				TargetAttributes = {
+					7EF5973C1E5FE74F0039821A = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 99357UCVXN;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7EF597381E5FE74F0039821A /* Build configuration list for PBXProject "BLEConsumer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7EF597341E5FE74F0039821A;
+			productRefGroup = 7EF5973E1E5FE74F0039821A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7EF5973C1E5FE74F0039821A /* BLEConsumer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7EF5973B1E5FE74F0039821A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EF5974D1E5FE74F0039821A /* LaunchScreen.storyboard in Resources */,
+				7EF5974A1E5FE74F0039821A /* Assets.xcassets in Resources */,
+				7EF597481E5FE74F0039821A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7EF597391E5FE74F0039821A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EF597451E5FE74F0039821A /* DetailViewController.swift in Sources */,
+				7EF5977C1E5FF7560039821A /* DeviceManager.swift in Sources */,
+				7EF597431E5FE74F0039821A /* MasterViewController.swift in Sources */,
+				7EF597411E5FE74F0039821A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7EF597461E5FE74F0039821A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EF597471E5FE74F0039821A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7EF5974B1E5FE74F0039821A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EF5974C1E5FE74F0039821A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7EF5974F1E5FE74F0039821A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7EF597501E5FE74F0039821A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7EF597521E5FE74F0039821A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 99357UCVXN;
+				INFOPLIST_FILE = BLEConsumer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aubreygoodman.BLEConsumer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		7EF597531E5FE74F0039821A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 99357UCVXN;
+				INFOPLIST_FILE = BLEConsumer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aubreygoodman.BLEConsumer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7EF597381E5FE74F0039821A /* Build configuration list for PBXProject "BLEConsumer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EF5974F1E5FE74F0039821A /* Debug */,
+				7EF597501E5FE74F0039821A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7EF597511E5FE74F0039821A /* Build configuration list for PBXNativeTarget "BLEConsumer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EF597521E5FE74F0039821A /* Debug */,
+				7EF597531E5FE74F0039821A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7EF597351E5FE74F0039821A /* Project object */;
+}
