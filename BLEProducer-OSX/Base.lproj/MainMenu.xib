@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -11,7 +13,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target">
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="BLEProducer_OSX" customModuleProvider="target">
             <connections>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
@@ -682,11 +684,128 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="480" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5G4-ND-jXq">
+                        <rect key="frame" x="14" y="312" width="142" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Chp-Ya-BAw"/>
+                            <constraint firstAttribute="width" constant="130" id="lKp-5D-csE"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Start Advertising" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ijN-ds-hmc">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="startAdvertising:" target="0sp-GS-YaX" id="SkE-t4-UcQ"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PJP-Je-Ncg">
+                        <rect key="frame" x="308" y="312" width="158" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="xQa-We-NNz"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Stop Advertising" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AnH-uA-wJN">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="stopAdvertising:" target="0sp-GS-YaX" id="Crk-dv-OiT"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sTg-YR-wfq">
+                        <rect key="frame" x="20" y="294" width="40" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="Wfl-UU-dsJ"/>
+                            <constraint firstAttribute="width" constant="36" id="nqH-sb-afg"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="State:" id="efN-Kv-hhK">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="58C-jI-kp1">
+                        <rect key="frame" x="64" y="294" width="398" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="VdM-Dd-SfU"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="jUH-R1-Uuh">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2lp-QI-cbd">
+                        <rect key="frame" x="22" y="234" width="96" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="1Hr-se-I1k"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="jvG-av-kLD">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U7L-eg-iph">
+                        <rect key="frame" x="22" y="264" width="440" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Characteristic:" id="rdP-aC-29Y">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YGv-XE-ZaJ">
+                        <rect key="frame" x="118" y="228" width="85" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="73" id="GaI-gN-Myq"/>
+                            <constraint firstAttribute="height" constant="21" id="K1x-6v-TwD"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jnY-hd-48g">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="updateCharacteristic:" target="0sp-GS-YaX" id="2GS-mG-zsQ"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="58C-jI-kp1" firstAttribute="top" secondItem="PJP-Je-Ncg" secondAttribute="bottom" constant="8" id="1u9-KQ-N3f"/>
+                    <constraint firstAttribute="trailing" secondItem="58C-jI-kp1" secondAttribute="trailing" constant="20" id="34D-RP-hUu"/>
+                    <constraint firstItem="2lp-QI-cbd" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="22" id="4eU-4k-fSm"/>
+                    <constraint firstAttribute="trailing" secondItem="sTg-YR-wfq" secondAttribute="trailing" constant="422" id="5H4-Z9-Hqf"/>
+                    <constraint firstItem="YGv-XE-ZaJ" firstAttribute="top" secondItem="58C-jI-kp1" secondAttribute="bottom" constant="38" id="5a5-Ot-8pg"/>
+                    <constraint firstItem="5G4-ND-jXq" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="6IV-yM-JOb"/>
+                    <constraint firstItem="5G4-ND-jXq" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="7O6-GO-cAV"/>
+                    <constraint firstItem="YGv-XE-ZaJ" firstAttribute="leading" secondItem="2lp-QI-cbd" secondAttribute="trailing" constant="6" id="8xr-oY-3AP"/>
+                    <constraint firstItem="PJP-Je-Ncg" firstAttribute="leading" secondItem="5G4-ND-jXq" secondAttribute="trailing" constant="164" id="GbJ-tE-EEd"/>
+                    <constraint firstItem="58C-jI-kp1" firstAttribute="leading" secondItem="sTg-YR-wfq" secondAttribute="trailing" constant="8" id="LRz-ti-Ifh"/>
+                    <constraint firstAttribute="trailing" secondItem="U7L-eg-iph" secondAttribute="trailing" constant="20" id="MC3-K9-I8N"/>
+                    <constraint firstItem="PJP-Je-Ncg" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="NRf-X3-SQo"/>
+                    <constraint firstItem="2lp-QI-cbd" firstAttribute="top" secondItem="U7L-eg-iph" secondAttribute="bottom" constant="8" id="Ofj-6j-xc9"/>
+                    <constraint firstItem="sTg-YR-wfq" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="22" id="RMa-PG-QuJ"/>
+                    <constraint firstItem="2lp-QI-cbd" firstAttribute="top" secondItem="U7L-eg-iph" secondAttribute="bottom" constant="8" id="bHx-5D-n9f"/>
+                    <constraint firstItem="U7L-eg-iph" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="24" id="g9f-xt-42g"/>
+                    <constraint firstAttribute="trailing" secondItem="PJP-Je-Ncg" secondAttribute="trailing" constant="20" id="gSi-EZ-rpu"/>
+                    <constraint firstItem="U7L-eg-iph" firstAttribute="top" secondItem="sTg-YR-wfq" secondAttribute="bottom" constant="13" id="hpA-JD-Umw"/>
+                    <constraint firstAttribute="trailing" secondItem="2lp-QI-cbd" secondAttribute="trailing" constant="362" id="iq3-Xb-qnB"/>
+                    <constraint firstItem="sTg-YR-wfq" firstAttribute="top" secondItem="5G4-ND-jXq" secondAttribute="bottom" constant="8" id="wuz-ct-t89"/>
+                </constraints>
             </view>
         </window>
+        <viewController id="0sp-GS-YaX" customClass="PeripheralViewController" customModule="BLEProducer_OSX" customModuleProvider="target">
+            <connections>
+                <outlet property="btnStartAdvertising" destination="5G4-ND-jXq" id="xct-ZD-mI6"/>
+                <outlet property="btnStopAdvertising" destination="PJP-Je-Ncg" id="mbo-9P-o5D"/>
+                <outlet property="btnUpdateCharacteristic" destination="YGv-XE-ZaJ" id="coD-Y5-Xgh"/>
+                <outlet property="characteristicValue" destination="2lp-QI-cbd" id="sdB-IA-vHN"/>
+                <outlet property="lblState" destination="58C-jI-kp1" id="mvX-gu-K4i"/>
+                <outlet property="view" destination="EiT-Mj-1SZ" id="zkf-jh-Yzg"/>
+            </connections>
+        </viewController>
     </objects>
 </document>
