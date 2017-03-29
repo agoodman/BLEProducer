@@ -13,10 +13,9 @@ class PeripheralViewController: NSViewController {
     @IBOutlet weak var btnStartAdvertising : NSButton!
     @IBOutlet weak var btnStopAdvertising : NSButton!
     @IBOutlet weak var lblState : NSTextField!
-    @IBOutlet weak var characteristicValue : NSTextField!
-    @IBOutlet weak var btnUpdateCharacteristic : NSButton!
+    @IBOutlet weak var lblFoodSupply : NSTextField!
     
-    let peripheral = SimulatedPeripheral()
+    let peripheral = SimulatedPeripheral(interval: 1)
     
     private var value : String? = nil
     
@@ -27,19 +26,27 @@ class PeripheralViewController: NSViewController {
                 self.lblState.stringValue = "\(state.toString())"
             }
         }
+        
+        peripheral.valueUpdatedHandler = { value in
+            DispatchQueue.main.async {
+                self.lblFoodSupply.stringValue = "\(value)"
+            }
+        }
+        
+        btnStartAdvertising.isEnabled = true
+        btnStopAdvertising.isEnabled = false
     }
 
     @IBAction func startAdvertising(_ sender: AnyObject) {
         peripheral.startAdvertising(name: "BLEProducer")
+        btnStartAdvertising.isEnabled = false
+        btnStopAdvertising.isEnabled = true
     }
     
     @IBAction func stopAdvertising(_ sender: AnyObject) {
         peripheral.stopAdvertising()
+        btnStartAdvertising.isEnabled = true
+        btnStopAdvertising.isEnabled = false
     }
     
-    @IBAction func updateCharacteristic(_ sender: AnyObject) {
-        self.value = self.characteristicValue.stringValue
-        self.peripheral.updateCharacteristic(value: self.value!)
-    }
-
 }

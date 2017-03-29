@@ -739,60 +739,42 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2lp-QI-cbd">
-                        <rect key="frame" x="22" y="234" width="96" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="22" id="1Hr-se-I1k"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="jvG-av-kLD">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U7L-eg-iph">
-                        <rect key="frame" x="22" y="264" width="440" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Characteristic:" id="rdP-aC-29Y">
+                        <rect key="frame" x="22" y="264" width="84" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Food Supply:" id="rdP-aC-29Y">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YGv-XE-ZaJ">
-                        <rect key="frame" x="118" y="228" width="85" height="32"/>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Eb5-84-eTG">
+                        <rect key="frame" x="110" y="264" width="352" height="17"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="73" id="GaI-gN-Myq"/>
-                            <constraint firstAttribute="height" constant="21" id="K1x-6v-TwD"/>
+                            <constraint firstAttribute="height" constant="17" id="5gJ-jQ-94k"/>
                         </constraints>
-                        <buttonCell key="cell" type="push" title="Update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jnY-hd-48g">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="38p-jx-Fwp">
                             <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="updateCharacteristic:" target="0sp-GS-YaX" id="2GS-mG-zsQ"/>
-                        </connections>
-                    </button>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="58C-jI-kp1" firstAttribute="top" secondItem="PJP-Je-Ncg" secondAttribute="bottom" constant="8" id="1u9-KQ-N3f"/>
                     <constraint firstAttribute="trailing" secondItem="58C-jI-kp1" secondAttribute="trailing" constant="20" id="34D-RP-hUu"/>
-                    <constraint firstItem="2lp-QI-cbd" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="22" id="4eU-4k-fSm"/>
                     <constraint firstAttribute="trailing" secondItem="sTg-YR-wfq" secondAttribute="trailing" constant="422" id="5H4-Z9-Hqf"/>
-                    <constraint firstItem="YGv-XE-ZaJ" firstAttribute="top" secondItem="58C-jI-kp1" secondAttribute="bottom" constant="38" id="5a5-Ot-8pg"/>
                     <constraint firstItem="5G4-ND-jXq" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="6IV-yM-JOb"/>
                     <constraint firstItem="5G4-ND-jXq" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="7O6-GO-cAV"/>
-                    <constraint firstItem="YGv-XE-ZaJ" firstAttribute="leading" secondItem="2lp-QI-cbd" secondAttribute="trailing" constant="6" id="8xr-oY-3AP"/>
+                    <constraint firstAttribute="trailing" secondItem="Eb5-84-eTG" secondAttribute="trailing" constant="20" id="9fa-k9-rJX"/>
                     <constraint firstItem="PJP-Je-Ncg" firstAttribute="leading" secondItem="5G4-ND-jXq" secondAttribute="trailing" constant="164" id="GbJ-tE-EEd"/>
                     <constraint firstItem="58C-jI-kp1" firstAttribute="leading" secondItem="sTg-YR-wfq" secondAttribute="trailing" constant="8" id="LRz-ti-Ifh"/>
-                    <constraint firstAttribute="trailing" secondItem="U7L-eg-iph" secondAttribute="trailing" constant="20" id="MC3-K9-I8N"/>
                     <constraint firstItem="PJP-Je-Ncg" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="NRf-X3-SQo"/>
-                    <constraint firstItem="2lp-QI-cbd" firstAttribute="top" secondItem="U7L-eg-iph" secondAttribute="bottom" constant="8" id="Ofj-6j-xc9"/>
                     <constraint firstItem="sTg-YR-wfq" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="22" id="RMa-PG-QuJ"/>
-                    <constraint firstItem="2lp-QI-cbd" firstAttribute="top" secondItem="U7L-eg-iph" secondAttribute="bottom" constant="8" id="bHx-5D-n9f"/>
                     <constraint firstItem="U7L-eg-iph" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="24" id="g9f-xt-42g"/>
                     <constraint firstAttribute="trailing" secondItem="PJP-Je-Ncg" secondAttribute="trailing" constant="20" id="gSi-EZ-rpu"/>
                     <constraint firstItem="U7L-eg-iph" firstAttribute="top" secondItem="sTg-YR-wfq" secondAttribute="bottom" constant="13" id="hpA-JD-Umw"/>
-                    <constraint firstAttribute="trailing" secondItem="2lp-QI-cbd" secondAttribute="trailing" constant="362" id="iq3-Xb-qnB"/>
+                    <constraint firstItem="Eb5-84-eTG" firstAttribute="centerY" secondItem="U7L-eg-iph" secondAttribute="centerY" id="rjf-EE-1Fx"/>
+                    <constraint firstItem="Eb5-84-eTG" firstAttribute="leading" secondItem="U7L-eg-iph" secondAttribute="trailing" constant="8" id="tmf-J0-Uol"/>
                     <constraint firstItem="sTg-YR-wfq" firstAttribute="top" secondItem="5G4-ND-jXq" secondAttribute="bottom" constant="8" id="wuz-ct-t89"/>
                 </constraints>
             </view>
@@ -801,8 +783,7 @@
             <connections>
                 <outlet property="btnStartAdvertising" destination="5G4-ND-jXq" id="xct-ZD-mI6"/>
                 <outlet property="btnStopAdvertising" destination="PJP-Je-Ncg" id="mbo-9P-o5D"/>
-                <outlet property="btnUpdateCharacteristic" destination="YGv-XE-ZaJ" id="coD-Y5-Xgh"/>
-                <outlet property="characteristicValue" destination="2lp-QI-cbd" id="sdB-IA-vHN"/>
+                <outlet property="lblFoodSupply" destination="Eb5-84-eTG" id="I5M-sE-g2j"/>
                 <outlet property="lblState" destination="58C-jI-kp1" id="mvX-gu-K4i"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="zkf-jh-Yzg"/>
             </connections>

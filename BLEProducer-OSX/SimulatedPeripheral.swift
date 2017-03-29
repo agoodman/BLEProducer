@@ -21,8 +21,14 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
 
     var service : CBService?
     
+    // serial queue for message processing
     private let queue = DispatchQueue(label: "queue.peripheral")
+    
     private var manager : CBPeripheralManager!
+    
+    private var isAdvertising : Bool = false
+
+    // collection of central manager references for subscribers
     private var subscribedCentrals : [CBCentral] = [CBCentral]()
 
     // food supply, slowly reduces at a fixed rate
@@ -31,56 +37,77 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
     // interval in milliseconds for decrementing the food supply
     private let foodConsumptionInterval : UInt32
     
+    // ticker timer
     private var foodConsumptionTimer : Timer!
+    
+    // stateUpdated handler to expose peripheral state
+    var stateUpdatedHandler : (CBPeripheralManagerState) -> Void = { _ in }
+    
+    // valueUpdated handler to expose food supply
+    var valueUpdatedHandler : (UInt) -> Void = { _ in }
+    
     
     // MARK: - Characteristics
     
     // DEAD: Bool (notify)
-    private let dead = CBMutableCharacteristic(type: CBUUID(string: "DEAD"), properties: .notify, value: nil, permissions: .readable)
+    static let dead = CBMutableCharacteristic(type: CBUUID(string: "DEAD"), properties: .notify, value: nil, permissions: .readable)
     
     // FEED: Bool (notify)
-    private let feed = CBMutableCharacteristic(type: CBUUID(string: "FEED"), properties: .notify, value: nil, permissions: .readable)
+    static let feed = CBMutableCharacteristic(type: CBUUID(string: "FEED"), properties: .notify, value: nil, permissions: .readable)
     
     // F00D: UInt (write)
-    private let food = CBMutableCharacteristic(type: CBUUID(string: "F00D"), properties: .write, value: nil, permissions: .writeable)
+    static let food = CBMutableCharacteristic(type: CBUUID(string: "F00D"), properties: .write, value: nil, permissions: .writeable)
+    
 
-    var stateUpdatedHandler : (CBPeripheralManagerState) -> Void = { _ in }
     
     init(interval: UInt32) {
         self.foodConsumptionInterval = interval
         super.init()
+        
+        // initialize the peripheral manager
         self.manager = CBPeripheralManager(delegate: self, queue: self.queue)
         
-        self.randomizeFoodSupply()
-        self.initCharacteristics()
+        initCharacteristics()
         
-        self.foodConsumptionTimer = Timer(timeInterval: TimeInterval(Double(interval) / 1000.0), repeats: true) { (timer: Timer) in
-            if self.foodSupply == 1 {
-                self.sendDead()
-            }
-            else {
-                self.foodSupply -= 1
-                if self.foodSupply < 10 {
-                    self.sendFeed()
-                }
-            }
-        }
+        self.foodConsumptionTimer = Timer.scheduledTimer(timeInterval: TimeInterval(interval), target: self, selector: #selector(self.tick), userInfo: nil, repeats: true)
+
+        NSLog("SimulatedPeripheral.init OK")
     }
     
     func startAdvertising(name: String, serviceId: String? = nil) {
-        NSLog("startAdvertising(\(name))")
         var advertisementData = [String:Any]()
         advertisementData[CBAdvertisementDataLocalNameKey] = name
         if let serviceId = serviceId {
             advertisementData[CBAdvertisementDataServiceUUIDsKey] = [CBUUID(string: serviceId)]
         }
-        self.manager.startAdvertising(advertisementData)
+
+        queue.async { [unowned self] in
+            if self.isAdvertising {
+                return
+            }
+            self.isAdvertising = true
+            
+            NSLog("startAdvertising(\(name))")
+            self.manager.startAdvertising(advertisementData)
+            
+            self.randomizeFoodSupply()
+            self.valueUpdatedHandler(self.foodSupply)
+        }
     }
     
     func stopAdvertising() {
-        NSLog("stopAdvertising")
-        self.manager.stopAdvertising()
+        queue.async { [unowned self] in
+            if self.isAdvertising {
+                NSLog("stopAdvertising")
+                self.manager.stopAdvertising()
+                
+                self.isAdvertising = false
+            }
+        }
     }
+    
+    
+    // MARK: - Peripheral Methods
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         NSLog("state: \(peripheral.state.toString())")
@@ -112,15 +139,12 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
         NSLog("didReceiveWrite(\(requests.count))")
         for request in requests {
-            self.queue.async {
-                var message = [UInt8](request.value!)
-                NSLog("ack(\(request.hashValue), \(message[0]))")
-                peripheral.respond(to: request, withResult: .success)
+            var message = [UInt8](request.value!)
+            NSLog("ack(\(request.hashValue), \(message[0]))")
+            peripheral.respond(to: request, withResult: .success)
 
-                if message.count == 1 && message[0] == 0x01 { // HI
-                    peripheral.updateValue(Data([0x00]), for: self.dead, onSubscribedCentrals: self.subscribedCentrals)
-                }
-            }
+            let value = UInt(message[1])
+            self.receiveFood(value)
         }
     }
     
@@ -137,13 +161,15 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
     }
     
     
-    func initCharacteristics() {
+    // MARK: - Private Methods
+    
+    private func initCharacteristics() {
         if let service = self.service {
             self.manager.remove(service as! CBMutableService)
         }
 
         let service = CBMutableService(type: CBUUID(string: "5050"), primary: true)
-        service.characteristics = [dead, food, feed]
+        service.characteristics = [SimulatedPeripheral.dead, SimulatedPeripheral.food, SimulatedPeripheral.feed]
         self.service = service
         self.manager.add(service)
     }
@@ -152,17 +178,58 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
         self.foodSupply = UInt(arc4random_uniform(40) + 20)
     }
     
+    // send "i'm dead" message
     private func sendDead() {
+        NSLog("dead")
         let data = Data([0x01])
-        self.manager.updateValue(data, for: dead, onSubscribedCentrals: self.subscribedCentrals)
+        queue.async { [unowned self] in
+            self.manager.updateValue(data, for: SimulatedPeripheral.dead, onSubscribedCentrals: self.subscribedCentrals)
+        }
     }
     
+    // send "feed me" message
     private func sendFeed() {
+        NSLog("feed")
         let data = Data([0x01])
-        self.manager.updateValue(data, for: feed, onSubscribedCentrals: self.subscribedCentrals)
+        queue.async { [unowned self] in
+            self.manager.updateValue(data, for: SimulatedPeripheral.feed, onSubscribedCentrals: self.subscribedCentrals)
+        }
+    }
+
+    // receive food message
+    private func receiveFood(_ value: UInt) {
+        NSLog("food(\(value))")
+        queue.async { [unowned self] in
+            self.foodSupply += value
+        }
+    }
+    
+    // executes on main queue, driven by timer
+    @objc private func tick() {
+        queue.async { [unowned self] in
+            if !self.isAdvertising {
+                return
+            }
+            
+            NSLog("tick(\(self.foodSupply))")
+            if self.foodSupply == 1 {
+                self.sendDead()
+                self.stopAdvertising()
+            }
+            else if self.foodSupply > 1 {
+                self.foodSupply -= 1
+                if self.foodSupply < 10 {
+                    self.sendFeed()
+                }
+            }
+            self.valueUpdatedHandler(self.foodSupply)
+        }
     }
     
 }
+
+
+// MARK: - 
 
 extension CBPeripheralManagerState {
     func toString() -> String {
