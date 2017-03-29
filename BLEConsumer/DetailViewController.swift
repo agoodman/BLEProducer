@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var lblLocalName : UILabel!
+    @IBOutlet weak var btnFeed : UIButton!
 
     var proxy : PeripheralProxy? = nil
     var connected : Bool = false
@@ -26,6 +27,32 @@ class DetailViewController: UIViewController {
         
         lblLocalName.text = proxy.localName()
         showConnectButton()
+        
+        DeviceManager.instance.connectedDeviceCallback = { [unowned self] proxy in
+            DispatchQueue.main.async { [unowned self] in
+                self.showDisconnectButton()
+                self.updateStateLabel(proxy)
+            }
+        }
+        
+        DeviceManager.instance.disconnectedDeviceCallback = { [unowned self] proxy in
+            DispatchQueue.main.async { [unowned self] in
+                self.showConnectButton()
+            }
+        }
+        
+        DeviceManager.instance.updatedDeviceCallback = { [unowned self] proxy in
+            DispatchQueue.main.async { [unowned self] in
+                self.updateStateLabel(proxy)
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        DeviceManager.instance.connectedDeviceCallback = { _ in }
+        DeviceManager.instance.disconnectedDeviceCallback = { _ in }
     }
     
     private func showConnectButton() {
@@ -33,9 +60,13 @@ class DetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = button
     }
 
-    private func showDisonnectButton() {
+    private func showDisconnectButton() {
         let button = UIBarButtonItem(title: "Disconnect", style: .plain, target: self, action: #selector(disconnectButton))
         self.navigationItem.rightBarButtonItem = button
+    }
+    
+    private func updateStateLabel(_ proxy: PeripheralProxy) {
+        self.detailDescriptionLabel.text = proxy.stateString()
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,7 +79,6 @@ class DetailViewController: UIViewController {
             return
         }
         DeviceManager.instance.connect(proxy)
-        showDisonnectButton()
     }
 
     @IBAction func disconnectButton() {
@@ -56,8 +86,11 @@ class DetailViewController: UIViewController {
             return
         }
         DeviceManager.instance.disconnect(proxy)
-        showConnectButton()
     }
 
+    @IBAction func sendFood() {
+        DeviceManager.instance.sendFood(20, proxy: self.proxy!)
+    }
+    
 }
 

@@ -24,6 +24,7 @@ class DeviceManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     private var bleManager : CBCentralManager!
     private var knownPeripherals = Set<PeripheralProxy>()
     private var connectedPeripherals = [UUID : CBPeripheral]()
+    private var connectedProxies = Set<PeripheralProxy>()
 
     override init() {
         super.init()
@@ -33,11 +34,15 @@ class DeviceManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var stateUpdatedHandler : (CBManagerState) -> Void = { _ in }
 
     func startScanning() {
-        self.bleManager.scanForPeripherals(withServices: nil, options: nil)
+        queue.async { [unowned self] in
+            self.bleManager.scanForPeripherals(withServices: nil, options: nil)
+        }
     }
     
     func stopScanning() {
-        self.bleManager.stopScan()
+        queue.async { [unowned self] in
+            self.bleManager.stopScan()
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
@@ -99,9 +104,9 @@ class DeviceManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             self.connectedDeviceCallback(proxy)
             peripheral.delegate = self
             
-            self.queue.async {
+            queue.async {
                 NSLog("discoverServices")
-                peripheral.discoverServices([CBUUID(string: "BABE")])
+                peripheral.discoverServices([Characteristics.service])
             }
         }
     }
@@ -147,20 +152,11 @@ class DeviceManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         NSLog("didDiscoverCharacteristicsForService(\(service.uuid))")
-        self.queue.async {
-            if let service = peripheral.services?.first {
-                for characteristic in service.characteristics! {
+        if let service = peripheral.services?.first {
+            for characteristic in service.characteristics! {
+                if characteristic.uuid != Characteristics.food.uuid {
                     NSLog("subscribeTo(\(characteristic.uuid))")
                     peripheral.setNotifyValue(true, for: characteristic)
-                    
-                    if characteristic.uuid == CBUUID(string: "F00D") {
-                        self.queue.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
-                            let message : [UInt8] = [0x01] // HI
-                            let data = Data(bytes: message, count: 1)
-                            NSLog("writeTo(\(characteristic.uuid), %x)", message[0])
-                            peripheral.writeValue(data, for: characteristic, type: .withResponse)
-                        }
-                    }
                 }
             }
         }
@@ -184,8 +180,24 @@ class DeviceManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             NSLog("errorUpdatingValueFor(\(characteristic.uuid), \(error)")
         }
         else {
-            let deadValue = [UInt8](characteristic.value!)
-            NSLog("didUpdateValueForCharacteristic(\(characteristic.uuid), \(deadValue[0] == 0x01))")
+            var result = false
+            if characteristic.uuid == Characteristics.feed.uuid {
+                let feedValue = [UInt8](characteristic.value!)
+                result = feedValue[0] == 1
+                if let proxy = connectedProxies.filter({ $0.peripheral.identifier == peripheral.identifier }).first {
+                    proxy.state = result ? .hungry : .alive
+                    updatedDeviceCallback(proxy)
+                }
+            }
+            else if characteristic.uuid == Characteristics.dead.uuid {
+                let deadValue = [UInt8](characteristic.value!)
+                result = deadValue[0] == 1
+                if let proxy = connectedProxies.filter({ $0.peripheral.identifier == peripheral.identifier }).first {
+                    proxy.state = result ? .dead : .alive
+                    updatedDeviceCallback(proxy)
+                }
+            }
+            NSLog("didUpdateValueForCharacteristic(\(characteristic.uuid), \(result))")
         }
     }
     
@@ -210,14 +222,40 @@ class DeviceManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     // MARK: - Peripheral API
     
     func connect(_ proxy: PeripheralProxy) {
-        bleManager.connect(proxy.peripheral, options: nil)
+        queue.async { [unowned self] in
+            self.bleManager.connect(proxy.peripheral, options: nil)
+        }
     }
     
     func disconnect(_ proxy: PeripheralProxy) {
-        bleManager.cancelPeripheralConnection(proxy.peripheral)
+        queue.async { [unowned self] in
+            self.bleManager.cancelPeripheralConnection(proxy.peripheral)
+        }
+    }
+    
+    
+    // MARK: -
+    
+    func sendFood(_ value: UInt, proxy: PeripheralProxy) {
+        let serviceUuid = Characteristics.service
+        let foodUuid = Characteristics.food.uuid
+        guard let service = proxy.peripheral.services?.filter({ $0.uuid == serviceUuid }).first,
+            let characteristic = service.characteristics?.filter({ $0.uuid == foodUuid }).first else {
+            NSLog("not ready")
+            return
+        }
+
+        queue.async {
+            let message : [UInt8] = [20]
+            let data = Data(bytes: message, count: 1)
+            NSLog("writeTo(\(foodUuid), %x)", message[0])
+            proxy.peripheral.writeValue(data, for: characteristic, type: .withResponse)
+        }
     }
     
 }
+
+// MARK: - 
 
 extension CBManagerState {
     func toString() -> String {
@@ -238,11 +276,18 @@ extension CBManagerState {
     }
 }
 
+enum PeripheralState {
+    case dead
+    case hungry
+    case alive
+}
+
 class PeripheralProxy : Hashable, Equatable {
     var date : Date
     var rssi : Int
     let payload : [String : Any]
     let peripheral : CBPeripheral
+    var state : PeripheralState
     
     var hashValue: Int {
         return peripheral.identifier.hashValue
@@ -253,6 +298,7 @@ class PeripheralProxy : Hashable, Equatable {
         self.date = Date()
         self.rssi = rssi
         self.payload = payload
+        self.state = .alive
     }
     
     func localName() -> String {
@@ -262,6 +308,10 @@ class PeripheralProxy : Hashable, Equatable {
     func serviceIds() -> [CBUUID] {
         let uuids = self.payload[CBAdvertisementDataServiceUUIDsKey] as! NSArray
         return uuids.map { return $0 as! CBUUID }
+    }
+    
+    func stateString() -> String {
+        return (state == .dead ? "Dead" : (state == .hungry ? "Hungry" : "Alive"))
     }
 }
 

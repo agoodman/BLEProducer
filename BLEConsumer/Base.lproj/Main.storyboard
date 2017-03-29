@@ -54,11 +54,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S93-78-Ui2">
+                                <rect key="frame" x="16" y="169" width="343" height="110"/>
+                                <state key="normal" title="Feed (20)"/>
+                                <connections>
+                                    <action selector="sendFood" destination="JEX-9P-axG" eventType="touchUpInside" id="FI4-5j-zHU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="S93-78-Ui2" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="LBi-xp-LOr"/>
                             <constraint firstItem="gAf-UG-V82" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="Lb9-j2-y3s"/>
+                            <constraint firstItem="S93-78-Ui2" firstAttribute="top" secondItem="gAf-UG-V82" secondAttribute="bottom" constant="20" id="PBD-cb-uST"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
+                            <constraint firstItem="S93-78-Ui2" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="X2T-fF-NPd"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="S93-78-Ui2" secondAttribute="bottom" constant="20" id="Zax-Z9-QP1"/>
                             <constraint firstItem="gAf-UG-V82" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="8" id="g0w-SI-xof"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
                             <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
@@ -68,6 +79,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
+                        <outlet property="btnFeed" destination="S93-78-Ui2" id="7g6-kX-IqW"/>
                         <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
                         <outlet property="lblLocalName" destination="gAf-UG-V82" id="TBU-bq-daM"/>
                     </connections>
@@ -103,18 +115,18 @@
                                 <rect key="frame" x="0.0" y="22" width="375" height="116"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="115.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Arm-wq-HPj">
-                                            <rect key="frame" x="15" y="40" width="34" height="21"/>
+                                            <rect key="frame" x="15" y="41" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rnN-cz-39t">
-                                            <rect key="frame" x="15" y="61" width="44" height="15"/>
+                                            <rect key="frame" x="15" y="61.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>

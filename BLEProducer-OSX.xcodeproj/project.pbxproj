@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EBCA00E1E8B7DF900BE7A36 /* Characteristics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBCA00D1E8B7DF900BE7A36 /* Characteristics.swift */; };
 		7EF597661E5FEC7F0039821A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF597651E5FEC7F0039821A /* AppDelegate.swift */; };
 		7EF597681E5FEC7F0039821A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EF597671E5FEC7F0039821A /* Assets.xcassets */; };
 		7EF5976B1E5FEC7F0039821A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EF597691E5FEC7F0039821A /* MainMenu.xib */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7EBCA00D1E8B7DF900BE7A36 /* Characteristics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Characteristics.swift; sourceTree = "<group>"; };
 		7EF597621E5FEC7F0039821A /* BLEProducer-OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLEProducer-OSX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF597651E5FEC7F0039821A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EF597671E5FEC7F0039821A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				7EF597691E5FEC7F0039821A /* MainMenu.xib */,
 				7EF5976C1E5FEC7F0039821A /* Info.plist */,
 				7EF597771E5FED860039821A /* PeripheralViewController.swift */,
+				7EBCA00D1E8B7DF900BE7A36 /* Characteristics.swift */,
 			);
 			path = "BLEProducer-OSX";
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				7EF597761E5FED000039821A /* SimulatedPeripheral.swift in Sources */,
 				7EF597781E5FED860039821A /* PeripheralViewController.swift in Sources */,
 				7EF597661E5FEC7F0039821A /* AppDelegate.swift in Sources */,
+				7EBCA00E1E8B7DF900BE7A36 /* Characteristics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +306,7 @@
 				7EF597711E5FEC7F0039821A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -47,19 +47,6 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
     var valueUpdatedHandler : (UInt) -> Void = { _ in }
     
     
-    // MARK: - Characteristics
-    
-    // DEAD: Bool (notify)
-    static let dead = CBMutableCharacteristic(type: CBUUID(string: "DEAD"), properties: .notify, value: nil, permissions: .readable)
-    
-    // FEED: Bool (notify)
-    static let feed = CBMutableCharacteristic(type: CBUUID(string: "FEED"), properties: .notify, value: nil, permissions: .readable)
-    
-    // F00D: UInt (write)
-    static let food = CBMutableCharacteristic(type: CBUUID(string: "F00D"), properties: .write, value: nil, permissions: .writeable)
-    
-
-    
     init(interval: UInt32) {
         self.foodConsumptionInterval = interval
         super.init()
@@ -140,10 +127,12 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
         NSLog("didReceiveWrite(\(requests.count))")
         for request in requests {
             var message = [UInt8](request.value!)
-            NSLog("ack(\(request.hashValue), \(message[0]))")
+            assert(message.count==1, "expected 1 byte")
+
+            let value = UInt(message[0])
+            NSLog("ack(\(request.hashValue), \(value))")
             peripheral.respond(to: request, withResult: .success)
 
-            let value = UInt(message[1])
             self.receiveFood(value)
         }
     }
@@ -168,8 +157,8 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
             self.manager.remove(service as! CBMutableService)
         }
 
-        let service = CBMutableService(type: CBUUID(string: "5050"), primary: true)
-        service.characteristics = [SimulatedPeripheral.dead, SimulatedPeripheral.food, SimulatedPeripheral.feed]
+        let service = CBMutableService(type: Characteristics.service, primary: true)
+        service.characteristics = [Characteristics.dead, Characteristics.food, Characteristics.feed]
         self.service = service
         self.manager.add(service)
     }
@@ -183,7 +172,7 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
         NSLog("dead")
         let data = Data([0x01])
         queue.async { [unowned self] in
-            self.manager.updateValue(data, for: SimulatedPeripheral.dead, onSubscribedCentrals: self.subscribedCentrals)
+            self.manager.updateValue(data, for: Characteristics.dead, onSubscribedCentrals: self.subscribedCentrals)
         }
     }
     
@@ -192,7 +181,7 @@ class SimulatedPeripheral: NSObject, CBPeripheralManagerDelegate {
         NSLog("feed")
         let data = Data([0x01])
         queue.async { [unowned self] in
-            self.manager.updateValue(data, for: SimulatedPeripheral.feed, onSubscribedCentrals: self.subscribedCentrals)
+            self.manager.updateValue(data, for: Characteristics.feed, onSubscribedCentrals: self.subscribedCentrals)
         }
     }
 

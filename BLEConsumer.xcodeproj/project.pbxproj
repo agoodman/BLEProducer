@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EBCA0121E8B7F2A00BE7A36 /* Characteristics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBCA0111E8B7F2A00BE7A36 /* Characteristics.swift */; };
 		7EF597411E5FE74F0039821A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF597401E5FE74F0039821A /* AppDelegate.swift */; };
 		7EF597431E5FE74F0039821A /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF597421E5FE74F0039821A /* MasterViewController.swift */; };
 		7EF597451E5FE74F0039821A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF597441E5FE74F0039821A /* DetailViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7EBCA0111E8B7F2A00BE7A36 /* Characteristics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Characteristics.swift; path = "../BLEProducer-OSX/Characteristics.swift"; sourceTree = "<group>"; };
 		7EF5973D1E5FE74F0039821A /* BLEConsumer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLEConsumer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF597401E5FE74F0039821A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EF597421E5FE74F0039821A /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		7EF5973F1E5FE74F0039821A /* BLEConsumer */ = {
 			isa = PBXGroup;
 			children = (
+				7EBCA0111E8B7F2A00BE7A36 /* Characteristics.swift */,
 				7EF5977B1E5FF7560039821A /* DeviceManager.swift */,
 				7EF597401E5FE74F0039821A /* AppDelegate.swift */,
 				7EF597421E5FE74F0039821A /* MasterViewController.swift */,
@@ -156,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EF597451E5FE74F0039821A /* DetailViewController.swift in Sources */,
+				7EBCA0121E8B7F2A00BE7A36 /* Characteristics.swift in Sources */,
 				7EF5977C1E5FF7560039821A /* DeviceManager.swift in Sources */,
 				7EF597431E5FE74F0039821A /* MasterViewController.swift in Sources */,
 				7EF597411E5FE74F0039821A /* AppDelegate.swift in Sources */,
@@ -324,6 +328,7 @@
 				7EF597531E5FE74F0039821A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
